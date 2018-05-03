@@ -1,7 +1,7 @@
 
 # WEBAPP Banco Mais
 
-Esta WEBAPP consome os serviços fornecidos pela (API BANCO MAIS)[https://github.com/renatofelixdev/banco-mais-api].
+Esta WEBAPP consome os serviços fornecidos pela [API BANCO MAIS](https://github.com/renatofelixdev/banco-mais-api).
 
 Projeto desenvolvido com [React](https://reactjs.org/)
 
