@@ -30,7 +30,7 @@ class FormBankAgency extends Component {
         this.props.saveBankAgency(bankAgency, this.props.user);
     }
 
-    componentDidMount() {
+    componentDidMount() {   
         window.componentHandler.upgradeDom();
  
         this.context.store.dispatch(BankAgencyApi.getBanks(this.props.user));

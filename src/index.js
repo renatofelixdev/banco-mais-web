@@ -10,6 +10,8 @@ import BankAgency from './components/main/bankAgency/BankAgency';
 import FormBankAgency from './components/main/bankAgency/FormBankAgency';
 import UserClient from './components/main/userClient/UserClient';
 import FormUserClient from './components/main/userClient/FormUserClient';
+import BankAccount from './components/main/bankAccount/BankAccount';
+import FormBankAccount from './components/main/bankAccount/FormBankAccount';
 
 import { Router, Route, browserHistory,IndexRoute } from 'react-router';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -25,6 +27,7 @@ import { formUserMaster } from './reducers/userMaster';
 import { banks, formBank } from './reducers/bank';
 import { banksAgencies, formBankAgency } from './reducers/bankAgency';
 import { usersClient, formUserClient } from './reducers/userClient';
+import { banksAccounts, formBankAccount } from './reducers/bankAccount';
 
 
 function checkAuthentication(nextState, replace) {
@@ -42,7 +45,9 @@ const reducers = combineReducers({ notification,
                                     banksAgencies,
                                     formBankAgency,
                                     usersClient,
-                                    formUserClient});
+                                    formUserClient,
+                                    banksAccounts,
+                                    formBankAccount});
 
 const persistConfig = {
     key:'root',
@@ -74,6 +79,10 @@ ReactDOM.render(
 
             <Route  path="/gestao/clientes" component={UserClient}  onEnter={checkAuthentication}/>
             <Route  path="/gestao/clientes/formulario" component={FormUserClient}  onEnter={checkAuthentication}/>
+
+
+            <Route  path="/gestao/contas-bancarias" component={BankAccount}  onEnter={checkAuthentication}/>
+            <Route  path="/gestao/contas-bancarias/formulario" component={FormBankAccount}  onEnter={checkAuthentication}/>
   
           </Route>
           {/* <Route path="/cliente" component={App} store={store}>
