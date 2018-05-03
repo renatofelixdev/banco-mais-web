@@ -3,7 +3,7 @@ import ProgressBar from './ProgressBar';
 import Notification from './Notification';
 import NotificationModel from '../models/Notification';
 import LoginApi from '../api/LoginApi';
-import logo from '../imgs/logo-full.png';
+import logo from '../imgs/logo.png';
 import '../css/login.css';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
