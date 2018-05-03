@@ -26,3 +26,8 @@ export const BANK_ACCOUNT_STATUS = DOMAIN + "/api/bank-account/:id/status";
 export const BANK_ACCOUNT_TYPES = DOMAIN + "/api/bank-account/types";
 
 export const BANK_ACCOUNT_BY_USER_CLIENT = DOMAIN + "/api/bank-accounts/user-client";
+
+export const BANK_STATEMENT = DOMAIN + "/api/bank-statement";
+export const BANK_DEPOSIT = DOMAIN + "/api/deposit";
+export const BANK_TRANSFER = DOMAIN + "/api/bank-transfer";
+export const BANK_WITHDRAWAL = DOMAIN + "/api/account-withdrawal";

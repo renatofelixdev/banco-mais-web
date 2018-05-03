@@ -295,6 +295,9 @@ export default class BankAccountApi {
                         response.json().then(list => {
                             dispatch(alterProgressBar(false));
                             dispatch(listBanksAccounts(list));
+                            // if(list.length > 0){
+                            //     dispatch(selectBankAccount(list[0]));
+                            // }
                             return list;
                         });
                     } else {

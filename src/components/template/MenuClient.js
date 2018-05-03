@@ -33,8 +33,8 @@ class Menu extends Component {
                         <Link className="mdl-navigation__link" to="/cliente/minhas-contas"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">description</i><span className="contrib-menu-text contrib-url-noticias">Minhas Contas</span></Link>
                         <Link className="mdl-navigation__link" to="/cliente/extratos"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">record_voice_over</i><span className="contrib-menu-text contrib-url-noticias">Extratos</span></Link>
                         <Link className="mdl-navigation__link" to="/cliente/transferencias"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">layers</i><span className="contrib-menu-text">Transferências</span></Link>
-                        <Link className="mdl-navigation__link" to="/cliente/saques"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i><span className="contrib-menu-text">Saques</span></Link>
-                        <Link className="mdl-navigation__link" to="/cliente/depositos"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i><span className="contrib-menu-text">Depósitos</span></Link>
+                        <Link className="mdl-navigation__link" to="/cliente/saque"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i><span className="contrib-menu-text">Saque</span></Link>
+                        <Link className="mdl-navigation__link" to="/cliente/deposito"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i><span className="contrib-menu-text">Depósito</span></Link>
                 </nav>
             </div>
         );

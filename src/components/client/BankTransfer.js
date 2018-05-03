@@ -12,7 +12,7 @@ import BreadCrumb from '../BreadCrumb';
 import InputCustom from '../InputCustom';
 import BankOperationApi from '../../api/BankOperationApi';
 
-class BankStatement extends Component {
+class BankTransfer extends Component {
 
     componentDidMount() {
         window.componentHandler.upgradeDom();
@@ -23,7 +23,7 @@ class BankStatement extends Component {
     }
 
     back() {
-        browserHistory.push('/cliente/extratos');
+        browserHistory.push('/cliente/deposito');
     }
 
     render() {
@@ -31,10 +31,10 @@ class BankStatement extends Component {
             <div className="container">
                 <BreadCrumb way={[{ 'name': 'Banco Mais', 'link': '/cliente' },
                 { 'name': this.props.bankAccountSelect.bankAgency.bank.name + " " + this.props.bankAccountSelect.number, 'link': '' },
-                { 'name': 'Extrato', 'link': '' }]} />
+                { 'name': 'Transferência', 'link': '' }]} />
                 <div className="table-container mdl-grid" style={{ padding: '0px' }}>
                     <div className="mdl-cell mdl-cell--6-col">
-                        <span className="mdl-layout-title">Extrato [ Saldo {this.props.bankAccountSelect.balance}]</span>
+                        <span className="mdl-layout-title">Transferência [ Saldo {this.props.bankAccountSelect.balance}]</span>
                     </div>
                     <div className="mdl-cell mdl-cell--6-col">
                         <NotificationComponent align="right" store={this.context.store} />
@@ -46,24 +46,40 @@ class BankStatement extends Component {
                             <div className="mdl-grid">
 
                                 <div className="mdl-cell mdl-cell--6-col">
-                                    <InputCustom type="date" id="startDate"
-                                        inputRef={(input) => this.startDate = input} label="Data Inicial *"
-                                        valueInput={this.startDate}
+                                    <InputCustom type="text" id="bankTarget"
+                                        inputRef={(input) => this.bankTarget = input} label="Código do Banco Destino*"
+                                        valueInput={this.bankTarget}
                                         validators={[]} />
                                 </div>
+
                                 <div className="mdl-cell mdl-cell--6-col">
-                                    <InputCustom type="date" id="endDate"
-                                        inputRef={(input) => this.endDate = input} label="Data Final *"
-                                        valueInput={this.endDate}
+                                    <InputCustom type="text" id="agencyTarget"
+                                        inputRef={(input) => this.agencyTarget = input} label="Código da Agência Destino *"
+                                        valueInput={this.agencyTarget}
+                                        validators={[]} />
+                                </div>
+
+                                <div className="mdl-cell mdl-cell--6-col">
+                                    <InputCustom type="text" id="accountTarget"
+                                        inputRef={(input) => this.accountTarget = input} label="Número da Conta Destino *"
+                                        valueInput={this.accountTarget}
+                                        validators={[]} />
+                                </div>
+
+                                <div className="mdl-cell mdl-cell--6-col">
+                                    <InputCustom type="text" id="valueDeposit"
+                                        inputRef={(input) => this.valueDeposit = input} label="Valor *"
+                                        valueInput={this.valueDeposit}
                                         validators={[]} />
                                 </div>
                             </div>
                         </div>
                         <div className="mdl-card__actions mdl-card--border">
-                            <input type="button" onClick={() => this.props.listBankStatement(this.props.user,
-                                this.props.bankAccountSelect, this.startDate.value, this.endDate.value)}
+                            <input type="button" onClick={() => this.props.bankTransfer(this.props.user,
+                                this.props.bankAccountSelect, this.valueDeposit.value, this.bankTarget.value,
+                            this.agencyTarget.value, this.accountTarget.value)}
                             className="mdl-button mdl-button-r mdl-button--primary mdl-js-button mdl-js-ripple-effect"
-                             value="Exibir" />
+                             value="Transferir" />
                         </div>
                     </div>
 
@@ -79,23 +95,22 @@ const mapStateToProps = state => {
         user: typeof state.formUserClient.userClient === 'string' ?
             jwt.verify(state.formUserClient.userClient, 'userClient') : state.formUserClient.userClient,
         bankAccountSelect: state.bankAccountSelect,
-        notification : state.notification,
-        bankStatement : state.bankStatement
+        notification : state.notification
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        listBankStatement: (user, bankAccount, startDate, endDate) =>{
-            dispatch(BankOperationApi.listBankStatement(user, bankAccount, startDate, endDate));
+        bankTransfer: (user, bankAccount, value, bank, agency, account) =>{
+            dispatch(BankOperationApi.bankTransfer(user, bankAccount, value, bank, agency, account));
         }
     }
 }
 
-BankStatement.contextTypes = {
+BankTransfer.contextTypes = {
     store: PropTypes.object.isRequired
 }
 
-const BankStatementContainer = connect(mapStateToProps, mapDispatchToProps)(BankStatement);
+const BankTransferContainer = connect(mapStateToProps, mapDispatchToProps)(BankTransfer);
 
-export default BankStatementContainer
+export default BankTransferContainer

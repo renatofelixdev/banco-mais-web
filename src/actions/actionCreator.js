@@ -19,7 +19,8 @@ import {
     BANK_ACCOUNT_TYPES,
     CHANGE_BANK_ACCOUNT_TYPE,
     CHANGE_BANK_BANK_ACCOUNT,
-    BANK_ACCOUNT_SELECT
+    BANK_ACCOUNT_SELECT,
+    BANK_STATEMENT_OPERATION
 } from '../paths/types';
 
 export function login(jsonResponse){
@@ -110,4 +111,9 @@ export function changeBankAccountType(value){
 
 export function selectBankAccount(bankAccount){
     return {type:BANK_ACCOUNT_SELECT, bankAccount}
+} 
+
+
+export function bankStatement(list){
+    return {type:BANK_STATEMENT_OPERATION, list}
 } 

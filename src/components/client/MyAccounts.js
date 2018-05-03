@@ -53,7 +53,7 @@ class MyAccounts extends Component {
     renderNameBank(bankAccount){
         if(bankAccount.id === this.props.bankAccountSelect.id){
             return (
-                <span class="mdl-badge" data-badge="✓">{bankAccount.bankAgency.bank.name} ( {bankAccount.bankAgency.code} )</span>
+                <span className="mdl-badge" data-badge="✓">{bankAccount.bankAgency.bank.name} ( {bankAccount.bankAgency.code} )</span>
             );
         }else{
             return (

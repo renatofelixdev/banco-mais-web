@@ -17,6 +17,10 @@ import FormBankAccount from './components/main/bankAccount/FormBankAccount';
 import AppClient from './AppClient';
 import LoginClient from './components/LoginClient';
 import MyAccounts from './components/client/MyAccounts';
+import BankStatement from './components/client/BankStatement';
+import BankDeposit from './components/client/BankDeposit';
+import BankWithdrawal from './components/client/BankWithdrawal';
+import BankTransfer from './components/client/BankTransfer';
 
 import { Router, Route, browserHistory,IndexRoute } from 'react-router';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -33,6 +37,7 @@ import { banks, formBank } from './reducers/bank';
 import { banksAgencies, formBankAgency } from './reducers/bankAgency';
 import { usersClient, formUserClient } from './reducers/userClient';
 import { banksAccounts, formBankAccount, bankAccountSelect } from './reducers/bankAccount';
+import { bankStatement } from './reducers/operation';
 
 
 function checkAuthentication(nextState, replace) {
@@ -97,6 +102,10 @@ ReactDOM.render(
             <Route path="/cliente/sair" component={Logout} />            
             <IndexRoute component={MyAccounts}  onEnter={checkAuthentication}/>
             <Route path="/cliente/minhas-contas" component={MyAccounts}  onEnter={checkAuthentication}/>
+            <Route path="/cliente/extratos" component={BankStatement}  onEnter={checkAuthentication}/>
+            <Route path="/cliente/deposito" component={BankDeposit}  onEnter={checkAuthentication}/>
+            <Route path="/cliente/saque" component={BankWithdrawal}  onEnter={checkAuthentication}/>
+            <Route path="/cliente/transferencias" component={BankTransfer}  onEnter={checkAuthentication}/>
           </Route>
           
         </Router>
