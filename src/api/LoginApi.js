@@ -24,9 +24,10 @@ export default class LoginApi {
                     if(response.ok) {
                         response.json().then(user => {
                             dispatch(alterProgressBar(false));
-                            //localStorage.setItem('user', JSON.stringify({id: jsonResponse.id, token: jsonResponse.token, name: jsonResponse.name, email: jsonResponse.email}));
-                            
-                            dispatch(formUserMaster(jwt.sign(user, "user"), new Notification()));
+                            let jwtUser = jwt.sign(user, "user");
+                            localStorage.setItem('user', jwtUser);
+                            console.log(jwtUser);
+                            dispatch(formUserMaster(jwtUser, new Notification()));
                             browserHistory.push('/gestao');
                             return user;
                         });

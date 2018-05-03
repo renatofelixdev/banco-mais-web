@@ -1,0 +1,99 @@
+.components-menu-drawer {
+    border: none;
+}
+
+/* iOS Safari specific workaround */
+
+.components-menu-drawer .mdl-menu__container {
+    z-index: -1;
+}
+
+.components-menu-drawer .navigation {
+    z-index: -2;
+    background: #607D8B !important;
+}
+
+.components-menu-drawer .navigation {
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+/* END iOS Safari specific workaround */
+
+.components-menu-drawer .mdl-menu .mdl-menu__item {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.components-menu-drawer .drawer-header {
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding: 16px;
+    height: 151px;
+}
+
+.components-menu-drawer .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+}
+
+.components-menu-drawer .mdl-layout__drawer .avatar {
+    margin-bottom: 16px;
+}
+
+.components-menu-drawer .avatar-dropdown {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.components-menu-drawer .navigation .mdl-navigation__link {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.56);
+    font-weight: 500;
+}
+
+.components-menu-drawer .navigation .mdl-navigation__link:hover {
+    background-color: #FF5722;
+    color: #37474F;
+}
+
+.components-menu-drawer .navigation .mdl-navigation__link .material-icons {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.56);
+    margin-right: 32px;
+}
+
+.drawer-header{
+    background: #455A64 !important;
+}

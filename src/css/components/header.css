@@ -1,0 +1,18 @@
+.components-header{
+    background: #607D8B !important
+}
+
+.components-header .header-title{
+    color: white;
+}
+
+.components-header .material-icons{
+    color: white !important;
+}
+
+
+.img-responsive{
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
