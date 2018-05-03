@@ -23,18 +23,18 @@ class Menu extends Component {
                     <img src='https://getmdl.io/templates/dashboard/images/user.jpg' className="avatar" alt="Usuário"/>
                    
                     <div className="avatar-dropdown" style={{marginTop:'15px'}}>
-                        <span>
-                            {this.props.user.login}
-                        </span>
-                        <div className="mdl-layout-spacer"></div>
+                        <p>
+                            {this.props.user.name}
+                        </p>
                     </div>
                 </header>
                 <nav className="navigation mdl-navigation mdl-color--blue-grey-800">
                         {/* <a className="mdl-navigation__link" href="#contribuicoes"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">record_voice_over</i><span className="contrib-menu-text contrib-url-contribuicoes">Contribuições</span></a> */}
-                        <Link className="mdl-navigation__link" to="/gestao/bancos"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">description</i><span className="contrib-menu-text contrib-url-noticias">Bancos</span></Link>
-                        <Link className="mdl-navigation__link" to="/gestao/agencias"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">record_voice_over</i><span className="contrib-menu-text contrib-url-noticias">Agências</span></Link>
-                        <Link className="mdl-navigation__link" to="/gestao/contas-bancarias"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">layers</i><span className="contrib-menu-text">Contas</span></Link>
-                        <Link className="mdl-navigation__link" to="/gestao/clientes"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i><span className="contrib-menu-text">Usuários</span></Link>
+                        <Link className="mdl-navigation__link" to="/cliente/minhas-contas"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">description</i><span className="contrib-menu-text contrib-url-noticias">Minhas Contas</span></Link>
+                        <Link className="mdl-navigation__link" to="/cliente/extratos"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">record_voice_over</i><span className="contrib-menu-text contrib-url-noticias">Extratos</span></Link>
+                        <Link className="mdl-navigation__link" to="/cliente/transferencias"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">layers</i><span className="contrib-menu-text">Transferências</span></Link>
+                        <Link className="mdl-navigation__link" to="/cliente/saques"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i><span className="contrib-menu-text">Saques</span></Link>
+                        <Link className="mdl-navigation__link" to="/cliente/depositos"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i><span className="contrib-menu-text">Depósitos</span></Link>
                 </nav>
             </div>
         );
@@ -43,10 +43,9 @@ class Menu extends Component {
 
 
 const mapStateToProps = state => {
-    
     return {
-        user : state.formUserMaster.user ? jwt.verify(state.formUserMaster.user , 'user') : state.formUserMaster.user,
-            notification : state.formUserMaster.notification
+        user : typeof state.formUserClient.userClient === 'string' ? jwt.verify(state.formUserClient.userClient , 'userClient') : state.formUserClient.userClient,
+            notification : state.formUserClient.notification
     }
 };
 

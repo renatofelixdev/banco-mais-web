@@ -9,11 +9,11 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import InputCustom from './InputCustom';
 
-class Login extends Component {
+class LoginClient extends Component {
 
     login(event) {
         event.preventDefault();
-        this.props.login(this.email.value, this.password.value);
+        this.props.login(this.cpf.value, this.password.value);
     }
 
     render() {
@@ -28,7 +28,7 @@ class Login extends Component {
                     </div>
                     <div className="mdl-card__supporting-text">
                         <Notification align="center" store={this.context.store}/>
-                        <InputCustom type="text" id="email" inputRef={(input) => this.email = input} label="E-mail" validators={[]}/>
+                        <InputCustom type="text" id="cpf" inputRef={(input) => this.cpf = input} label="CPF" validators={[]}/>
                         <InputCustom type="password" id="password" inputRef={(input) => this.password = input} label="Senha" validators={[]}/>
                     </div>
                     <div className="mdl-card__actions mdl-card--border">
@@ -48,17 +48,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        login: (email, password) => {
-            dispatch(LoginApi.login(email, password));
+        login: (cpf, password) => {
+            dispatch(LoginApi.loginClient(cpf, password));
         }
     }
 }
 
-Login.contextTypes = {
+LoginClient.contextTypes = {
     store : PropTypes.object.isRequired
 }
 
-const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(Login);
+const LoginClientContainer = connect(mapStateToProps, mapDispatchToProps)(LoginClient);
 
-export default LoginContainer
+export default LoginClientContainer
 

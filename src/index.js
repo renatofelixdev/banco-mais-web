@@ -13,6 +13,11 @@ import FormUserClient from './components/main/userClient/FormUserClient';
 import BankAccount from './components/main/bankAccount/BankAccount';
 import FormBankAccount from './components/main/bankAccount/FormBankAccount';
 
+
+import AppClient from './AppClient';
+import LoginClient from './components/LoginClient';
+import MyAccounts from './components/client/MyAccounts';
+
 import { Router, Route, browserHistory,IndexRoute } from 'react-router';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -27,7 +32,7 @@ import { formUserMaster } from './reducers/userMaster';
 import { banks, formBank } from './reducers/bank';
 import { banksAgencies, formBankAgency } from './reducers/bankAgency';
 import { usersClient, formUserClient } from './reducers/userClient';
-import { banksAccounts, formBankAccount } from './reducers/bankAccount';
+import { banksAccounts, formBankAccount, bankAccountSelect } from './reducers/bankAccount';
 
 
 function checkAuthentication(nextState, replace) {
@@ -47,12 +52,13 @@ const reducers = combineReducers({ notification,
                                     usersClient,
                                     formUserClient,
                                     banksAccounts,
-                                    formBankAccount});
+                                    formBankAccount,
+                                    bankAccountSelect});
 
 const persistConfig = {
     key:'root',
     storage,
-    whitelist:['formUserMaster']
+    whitelist:['formUserMaster', 'formUserClient', 'bankAccountSelect']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -85,13 +91,13 @@ ReactDOM.render(
             <Route  path="/gestao/contas-bancarias/formulario" component={FormBankAccount}  onEnter={checkAuthentication}/>
   
           </Route>
-          {/* <Route path="/cliente" component={App} store={store}>
+
+          <Route path="/cliente/login" component={LoginClient} store={store} />
+          <Route path="/cliente" component={AppClient} store={store}>
             <Route path="/cliente/sair" component={Logout} />            
-  
-            <IndexRoute component={BankAccount} />
-            <Route  path="/cliente/conta" component={BankAccount} />
-  
-          </Route> */}
+            <IndexRoute component={MyAccounts}  onEnter={checkAuthentication}/>
+            <Route path="/cliente/minhas-contas" component={MyAccounts}  onEnter={checkAuthentication}/>
+          </Route>
           
         </Router>
       </Provider>

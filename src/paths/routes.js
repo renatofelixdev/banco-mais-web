@@ -1,6 +1,7 @@
 const DOMAIN = "http://localhost:9000";
 
 export const LOGIN_USER_MASTER = DOMAIN + "/api/user-master/login";
+export const LOGIN_USER_CLIENT = DOMAIN + "/api/user-client/login";
 
 export const LIST_BANKS = DOMAIN + "/api/banks";
 export const POST_BANK = DOMAIN + "/api/bank";
@@ -23,3 +24,5 @@ export const POST_BANK_ACCOUNT = DOMAIN + "/api/bank-account";
 export const BANK_ACCOUNT = DOMAIN + "/api/bank-account/:id";
 export const BANK_ACCOUNT_STATUS = DOMAIN + "/api/bank-account/:id/status";
 export const BANK_ACCOUNT_TYPES = DOMAIN + "/api/bank-account/types";
+
+export const BANK_ACCOUNT_BY_USER_CLIENT = DOMAIN + "/api/bank-accounts/user-client";

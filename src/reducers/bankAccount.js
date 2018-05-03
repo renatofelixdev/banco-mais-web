@@ -6,7 +6,8 @@ import { LIST_BANK_ACCOUNT,
     BANKS_BANK_ACCOUNT,
     BANKS_AGENCY_BANK_ACCOUNT, 
     BANK_ACCOUNT_TYPES,
-    CHANGE_BANK_ACCOUNT_TYPE} from '../paths/types';
+    CHANGE_BANK_ACCOUNT_TYPE,
+    BANK_ACCOUNT_SELECT} from '../paths/types';
 import Notification from '../models/Notification';
 import BankAccount from '../models/BankAccount';
 
@@ -75,6 +76,16 @@ export function formBankAccount(state = {bankAccount: new BankAccount(),
 
     if(action.type === CHANGE_BANK_ACCOUNT_TYPE){
         state.typeSelect = action.value;
+        return Object.assign({}, state);
+    }
+
+    return state;
+}
+
+export function bankAccountSelect(state = new BankAccount(), action){
+
+    if(action.type === BANK_ACCOUNT_SELECT){
+        state = action.bankAccount;
         return Object.assign({}, state);
     }
 

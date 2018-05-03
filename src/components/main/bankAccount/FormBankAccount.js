@@ -50,7 +50,7 @@ class FormBankAccount extends Component {
             this.cpf.value = bankAccount.userClient.cpf;
             this.address.value = bankAccount.userClient.address;
 
-            if(this.props.user === null || this.props.user === ''){
+            if(this.props.user !== null && this.props.user !== ''){
                 this.props.changeBank(bankAccount.bankAgency.bank.id, this.props.user);
             }
             this.props.changeBankAgency(bankAccount.bankAgency.id);
@@ -63,10 +63,6 @@ class FormBankAccount extends Component {
         if(this.props.user === null || this.props.user === ''){
             this.context.store.dispatch(BankAccountApi.getBanks(props.user));
             this.context.store.dispatch(BankAccountApi.getBankAccountTypes(props.user));
-            if(this.props.bankAccount.id !== null){
-                this.props.changeBank(this.props.bankAccount.bankAgency.bank.id, props.user);
-                this.props.changeBankAgency(this.props.bankAccount.bankAgency.id);
-            }
         }
     }
 

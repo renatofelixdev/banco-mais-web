@@ -19,12 +19,12 @@
 }
 
 .breadcrumb__step:hover:after {
-    background-color: rgb(0,188,212);
+    background-color: #CFD8DC;
     cursor: pointer;
 }
 
 .breadcrumb__step:hover {
-    background-color: rgb(0,188,212);
+    background-color: #CFD8DC;
     cursor: pointer;
 }
 
@@ -45,7 +45,7 @@
     left: 14px;
 }
 .breadcrumb__step--active::before {
-    color: #0288D1;
+    color: rgb(255,110,64);
 }
 /* .breadcrumb__step::before {
     content: counter(flag);
@@ -64,7 +64,7 @@
 } */
 
 .breadcrumb__step--active::after {
-    background: #0288D1;
+    background: rgb(255,110,64);
 }
 
 .breadcrumb__step::after {
@@ -78,5 +78,5 @@
     z-index: 1;
     border-radius: 0 5px 0 50px;
     background: #fff;
-    box-shadow: 2px -2px 0 2px #0288D1;
+    box-shadow: 2px -2px 0 2px rgb(255,110,64);
 }

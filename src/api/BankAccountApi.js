@@ -7,9 +7,10 @@ import { alterProgressBar,
     changeBankAccountType,
     listBanksToAccount,
     listBanksAgenciesToAccount,
-    listBankAccountTypes
+    listBankAccountTypes,
+    selectBankAccount
     } from '../actions/actionCreator';
-import { LIST_BANKS_ACCOUNTS, POST_BANK_ACCOUNT, BANK_ACCOUNT, BANK_ACCOUNT_STATUS, LIST_BANKS, LIST_BANKS_AGENCIES_BY_BANK, BANK_ACCOUNT_TYPES } from '../paths/routes';
+import { LIST_BANKS_ACCOUNTS, POST_BANK_ACCOUNT, BANK_ACCOUNT, BANK_ACCOUNT_STATUS, LIST_BANKS, LIST_BANKS_AGENCIES_BY_BANK, BANK_ACCOUNT_TYPES, BANK_ACCOUNT_BY_USER_CLIENT } from '../paths/routes';
 import { browserHistory } from 'react-router';
 import BankAccount from '../models/BankAccount';
 import Notification from '../models/Notification';
@@ -273,6 +274,44 @@ export default class BankAccountApi {
                         });
                     }
                 });
+        }
+    }
+
+    static listBankAccountsToClient(user) {
+        return dispatch => {
+
+            const requestInfo = {
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': user.tokenAccess.token
+                })
+            };
+
+            dispatch(alterProgressBar(true));
+
+            fetch(BANK_ACCOUNT_BY_USER_CLIENT, requestInfo)
+                .then(response => {
+                    if (response.ok) {
+                        response.json().then(list => {
+                            dispatch(alterProgressBar(false));
+                            dispatch(listBanksAccounts(list));
+                            return list;
+                        });
+                    } else {
+                        response.json().then(error => {
+                            dispatch(alterProgressBar(false));
+                            dispatch(updateNotification(true,error));
+                            //console.log(error);
+                            return error;
+                        });
+                    }
+                });
+        }
+    }
+
+    static selectBankAccount(value){
+        return dispatch => {
+            dispatch(selectBankAccount(value));
         }
     }
 
