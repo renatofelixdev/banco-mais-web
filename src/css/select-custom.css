@@ -1,0 +1,11 @@
+.select-custom{
+    width: 100%;
+}
+
+.label-custom{
+    color: rgba(0, 0, 0, 0.48);
+}
+
+.input-custom{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.34);
+}

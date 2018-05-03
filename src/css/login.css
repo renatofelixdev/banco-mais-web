@@ -1,0 +1,13 @@
+.form-login{
+    margin:auto; 
+    margin-top: 5em;
+    max-width:320px;
+}
+
+body{
+    background: #0097A7;
+}
+
+.form-login .mdl-card{
+    width: 100% !important;
+}

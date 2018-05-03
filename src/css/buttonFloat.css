@@ -1,0 +1,18 @@
+.mdl-button-r{
+    float: right;
+}
+
+.mdl-button-l{
+    float: left;
+}
+
+.mdl-button-danger{
+    color: #D32F2F !important;
+}
+
+.container-button{
+    margin:2em;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+}

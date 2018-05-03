@@ -1,0 +1,16 @@
+.input-custom{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.34);
+}
+
+.label-custom{
+    color: rgba(0, 0, 0, 0.48);
+}
+
+.input-text-custom{
+    width: 100%;
+}
+
+input:disabled {
+    background: #eee !important;
+    color: rgba(0, 0, 0, 0.54) !important;
+}

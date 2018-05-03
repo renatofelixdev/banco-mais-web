@@ -1,0 +1,49 @@
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align: right;
+}
+
+.material-icons{
+    color: white;
+    
+}
+
+.mdl-chip__action{
+    oppacity:1;
+}
+
+.mdl-chip__text{
+    color:white;
+}
+
+.warning{
+    background-color: #F57C00 !important;
+}
+
+.success{
+    background-color: #388E3C !important;
+}
+
+.error{
+    background-color: #D32F2F !important;
+}
+
+.info{
+    background-color: #1976D2 !important;
+}
+
+.mdl-chip{
+    height: auto !important;
+    white-space: unset !important;
+}

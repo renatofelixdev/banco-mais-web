@@ -1,0 +1,10 @@
+.span-status{
+    float: right;
+    padding: 5px;
+    background: red;
+    color: white;
+    font-size: 13px;
+    letter-spacing: 1px;
+    /* font-family: Roboto; */
+    font-weight: bold;
+}

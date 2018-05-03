@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
+import Login from './components/Login';
+import Logout from './components/Logout';
+import Bank from './components/main/bank/Bank';
 
 import { Router, Route, browserHistory,IndexRoute } from 'react-router';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
