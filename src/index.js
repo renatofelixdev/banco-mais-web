@@ -58,12 +58,13 @@ const reducers = combineReducers({ notification,
                                     formUserClient,
                                     banksAccounts,
                                     formBankAccount,
-                                    bankAccountSelect});
+                                    bankAccountSelect,
+                                  bankStatement});
 
 const persistConfig = {
     key:'root',
     storage,
-    whitelist:['formUserMaster', 'formUserClient', 'bankAccountSelect']
+    whitelist:['formUserMaster', 'formUserClient', 'bankAccountSelect', 'bankStatement']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers);

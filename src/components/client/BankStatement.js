@@ -26,7 +26,64 @@ class BankStatement extends Component {
         browserHistory.push('/cliente/extratos');
     }
 
+    componentWillReceiveProps(props){
+        console.log(props);
+    }
+
+    tableEmpty(){
+        if(this.props.bankStatement.size === 0){
+            return (
+                <tr>
+                    <td colSpan="3" className="mdl-data-table__cell--non-numeric">
+                        {this.props.progressBar === true ? 
+                            'Carregando ...' 
+                            :
+                            'Neste intervalo não foi realizado nenhuma operação!'
+                        } 
+                    </td>
+                </tr>
+            );
+        }
+    }
+
+    renderTable(bankStatement){
+            return (
+        <table className="table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                    <thead>
+                        <tr>
+                            <th className="mdl-data-table__cell--non-numeric">Data</th>
+                            <th className="mdl-data-table__cell--non-numeric">Operação</th>
+                            <th className="mdl-data-table__cell--non-numeric">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.tableEmpty()
+                        }
+                        {
+                            this.props.bankStatement.map(operation => {
+                                return (
+                                    <tr key={operation.id}>
+                                        <td className={"mdl-data-table__cell--non-numeric"}
+                                            >{operation.dateFormated}</td>
+                                        <td className={"mdl-data-table__cell--non-numeric"}
+                                            >{operation.operationDescription}</td>                                        
+                                        <td className={"mdl-data-table__cell--non-numeric"}
+                                            >{operation.value}</td>                                        
+                                        
+                                    </tr>
+                                );
+                            })
+                        }
+
+                    </tbody>
+                </table>
+            );
+        
+    }
+
     render() {
+        console.log(this);
         return (
             <div className="container">
                 <BreadCrumb way={[{ 'name': 'Banco Mais', 'link': '/cliente' },
@@ -66,6 +123,8 @@ class BankStatement extends Component {
                              value="Exibir" />
                         </div>
                     </div>
+
+                    { this.renderTable(this.props.bankStatement)}
 
                 </div>
             </div>

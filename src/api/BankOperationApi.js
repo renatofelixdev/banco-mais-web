@@ -23,7 +23,7 @@ export default class BankOperationApi {
             };
 
             dispatch(alterProgressBar(true));
-
+            dispatch(bankStatement([]));
             fetch(BANK_STATEMENT, requestInfo)
                 .then(response => {
                     if (response.ok) {

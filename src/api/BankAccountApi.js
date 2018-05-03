@@ -8,7 +8,8 @@ import { alterProgressBar,
     listBanksToAccount,
     listBanksAgenciesToAccount,
     listBankAccountTypes,
-    selectBankAccount
+    selectBankAccount,
+    bankStatement
     } from '../actions/actionCreator';
 import { LIST_BANKS_ACCOUNTS, POST_BANK_ACCOUNT, BANK_ACCOUNT, BANK_ACCOUNT_STATUS, LIST_BANKS, LIST_BANKS_AGENCIES_BY_BANK, BANK_ACCOUNT_TYPES, BANK_ACCOUNT_BY_USER_CLIENT } from '../paths/routes';
 import { browserHistory } from 'react-router';
@@ -314,6 +315,7 @@ export default class BankAccountApi {
 
     static selectBankAccount(value){
         return dispatch => {
+            dispatch(bankStatement([]));
             dispatch(selectBankAccount(value));
         }
     }
