@@ -4,3 +4,7 @@ export const PROGRESS_BAR   = "PROGRESS_BAR";
 export const USER_MASTER    = "USER_MASTER";
 export const LIST_BANK    = "LIST_BANK";
 export const FORM_BANK    = "FORM_BANK";
+export const LIST_BANK_AGENCY    = "LIST_BANK_AGENCY";
+export const FORM_BANK_AGENCY    = "FORM_BANK_AGENCY";
+export const BANK_AGENCY_BANKS    = "BANK_AGENCY_BANKS";
+export const CHANGE_BANK    = "CHANGE_BANK";

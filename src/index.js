@@ -6,6 +6,8 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import Bank from './components/main/bank/Bank';
 import FormBank from './components/main/bank/FormBank';
+import BankAgency from './components/main/bankAgency/BankAgency';
+import FormBankAgency from './components/main/bankAgency/FormBankAgency';
 
 import { Router, Route, browserHistory,IndexRoute } from 'react-router';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -19,6 +21,7 @@ import { notification } from './reducers/notification';
 import { progressBar } from './reducers/progressBar';
 import { formUserMaster } from './reducers/userMaster';
 import { banks, formBank } from './reducers/bank';
+import { banksAgencies, formBankAgency } from './reducers/bankAgency';
 
 
 function checkAuthentication(nextState, replace) {
@@ -32,7 +35,9 @@ const reducers = combineReducers({ notification,
                                     progressBar, 
                                     formUserMaster,
                                     banks,
-                                    formBank });
+                                    formBank,
+                                    banksAgencies,
+                                    formBankAgency });
 
 const persistConfig = {
     key:'root',
@@ -58,6 +63,10 @@ ReactDOM.render(
             <IndexRoute component={Bank}  onEnter={checkAuthentication}/>
             <Route  path="/gestao/bancos" component={Bank}  onEnter={checkAuthentication}/>
             <Route  path="/gestao/bancos/formulario" component={FormBank}  onEnter={checkAuthentication}/>
+
+
+            <Route  path="/gestao/agencias" component={BankAgency}  onEnter={checkAuthentication}/>
+            <Route  path="/gestao/agencias/formulario" component={FormBankAgency}  onEnter={checkAuthentication}/>
   
           </Route>
           {/* <Route path="/cliente" component={App} store={store}>

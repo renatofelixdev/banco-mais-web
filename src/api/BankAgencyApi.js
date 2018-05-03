@@ -1,15 +1,17 @@
 import { alterProgressBar, 
     updateNotification, 
-    listBanks,
-    formBank} from '../actions/actionCreator';
-import { LIST_BANKS, POST_BANK, BANK, BANK_STATUS } from '../paths/routes';
+    listBanksAgencies,
+    formBankAgency,
+    changeBank,
+    listBanksToAgencies} from '../actions/actionCreator';
+import { LIST_BANKS, POST_BANK, BANK, BANK_STATUS, LIST_BANKS_AGENCIES, POST_BANK_AGENCY, BANK_AGENCY, BANK_AGENCY_STATUS } from '../paths/routes';
 import { browserHistory } from 'react-router';
-import Bank from '../models/Bank';
+import BankAgency from '../models/BankAgency';
 import Notification from '../models/Notification';
 
-export default class BankApi {
+export default class BankAgencyApi {
 
-    static listBanks(user) {
+    static listBanksAgencies(user) {
         return dispatch => {
 
             const requestInfo = {
@@ -21,13 +23,12 @@ export default class BankApi {
 
             dispatch(alterProgressBar(true));
 
-            fetch(LIST_BANKS, requestInfo)
+            fetch(LIST_BANKS_AGENCIES, requestInfo)
                 .then(response => {
                     if (response.ok) {
                         response.json().then(list => {
                             dispatch(alterProgressBar(false));
-                            console.log(list);
-                            dispatch(listBanks(list));
+                            dispatch(listBanksAgencies(list));
                             return list;
                         });
                     } else {
@@ -42,24 +43,63 @@ export default class BankApi {
         }
     }
 
-    static newBank(){
+    static newBankAgency(){
         return dispatch => {
-            dispatch(formBank(new Bank(), new Notification()));
+            dispatch(formBankAgency(new BankAgency(), new Notification()));
         }
     }
 
-    static saveBank(bank, user){
+    static changeBank(value){
+        return dispatch => {
+            dispatch(changeBank(value));
+        }
+    }
+
+    static getBanks(user){
+        return dispatch => {
+
+            const requestInfo = {
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': user.tokenAccess.token
+                })
+            };
+
+            dispatch(alterProgressBar(true));
+
+            fetch(LIST_BANKS, requestInfo)
+                .then(response => {
+                    if(response.ok) {
+                        response.json().then(list => {
+                            dispatch(alterProgressBar(false));
+                            
+                            dispatch(listBanksToAgencies(list));
+                            return list;
+                        });
+                    } else {       
+                        response.json().then(error=>{
+                            dispatch(alterProgressBar(false));
+                            dispatch(updateNotification(true,error));
+                            //console.log(error);
+                            return error;
+                        });
+                    }
+                });
+        }
+    }
+
+    static saveBankAgency(bankAgency, user){
         return dispatch => {
             let verb = 'POST';
-            let url = POST_BANK;
-            if(bank.id && bank.id > 0){
+            let url = POST_BANK_AGENCY;
+            if(bankAgency.id && bankAgency.id > 0){
                 verb = 'PUT';
-                url = BANK.replace(":id", bank.id);
+                url = BANK_AGENCY.replace(":id", bankAgency.id);
             }
 
             const requestInfo = {
                 method: verb,
-                body: JSON.stringify(bank),
+                body: JSON.stringify(bankAgency),
                 headers: new Headers({
                     'Authorization': user.tokenAccess.token,
                     'Content-type': 'application/json'
@@ -74,14 +114,14 @@ export default class BankApi {
                         response.json().then(success => {
                             dispatch(updateNotification(true,success));
                             dispatch(alterProgressBar(false));
-                            browserHistory.push('/gestao/bancos');
+                            browserHistory.push('/gestao/agencias');
                             return success;
                         });
                     } else {       
                         response.json().then(error=>{
                             //console.log("error", error);
                             dispatch(alterProgressBar(false));
-                            dispatch(formBank(null, error));
+                            dispatch(formBankAgency(null, error));
                             dispatch(updateNotification(true,error));
                             return error;
                         });
@@ -90,7 +130,7 @@ export default class BankApi {
         }
     }
 
-    static getBank(id, user, url) {
+    static getBankAgency(id, user, url) {
         return dispatch => {
 
             const requestInfo = {
@@ -102,14 +142,14 @@ export default class BankApi {
 
             dispatch(alterProgressBar(true));
 
-            fetch(BANK.replace(":id", id), requestInfo)
+            fetch(BANK_AGENCY.replace(":id", id), requestInfo)
                 .then(response => {
                     if(response.ok) {
-                        response.json().then(bank => {
+                        response.json().then(bankAgency => {
                             dispatch(alterProgressBar(false));
-                            dispatch(formBank(bank, new Notification()));
+                            dispatch(formBankAgency(bankAgency, new Notification()));
                             browserHistory.push(url);
-                            return bank;
+                            return bankAgency;
                         });
                     } else {       
                         response.json().then(error=>{
@@ -133,13 +173,13 @@ export default class BankApi {
                 })
             };
             dispatch(alterProgressBar(true));
-            fetch(BANK_STATUS.replace(":id", id), requestInfo)
+            fetch(BANK_AGENCY_STATUS.replace(":id", id), requestInfo)
                 .then(response => {
                     if(response.ok) {
                         response.json().then(notification => {                            
                             dispatch(alterProgressBar(false));
                             dispatch(updateNotification(true,notification));
-                            dispatch(this.listBanks(user));                         
+                            dispatch(this.listBanksAgencies(user));                         
                         });
                     } else {       
                         response.json().then(error=>{

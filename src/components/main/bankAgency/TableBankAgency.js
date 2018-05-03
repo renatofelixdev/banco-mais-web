@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import ProgressBar from '../../ProgressBar';
 import NotificationComponent from '../../Notification';
 import { browserHistory } from 'react-router';
-import BankApi from '../../../api/BankApi';
+import BankAgencyApi from '../../../api/BankAgencyApi';
 import 'material-design-lite/material';
 import 'dialog-polyfill';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import jwt from 'jsonwebtoken';
 
-class TableBank extends Component {
+class TableBankAgency extends Component {
 
     componentDidMount() {
         window.componentHandler.upgradeDom();
@@ -21,27 +21,27 @@ class TableBank extends Component {
     }
 
     load() {
-        this.props.listBanks(this.props.user);
+        this.props.listBanksAgencies(this.props.user);
     }
 
     componentWillReceiveProps(props){
         if(this.props.user === null || this.props.user === '')
-            this.props.listBanks(props.user);
+            this.props.listBanksAgencies(props.user);
     }
 
     back(){
-        browserHistory.push('/gestao/bancos');
+        browserHistory.push('/gestao/agencias');
     }
 
     tableEmpty(){
-        if(this.props.banks.size === 0){
+        if(this.props.banksAgencies.size === 0){
             return (
                 <tr>
-                    <td colSpan="3" className="mdl-data-table__cell--non-numeric">
+                    <td colSpan="4" className="mdl-data-table__cell--non-numeric">
                         {this.props.progressBar === true ? 
                             'Carregando ...' 
                             :
-                            'Nenhum Banco cadastrado!'
+                            'Nenhuma Agência Bancária cadastrada!'
                         } 
                     </td>
                 </tr>
@@ -53,7 +53,7 @@ class TableBank extends Component {
         return (
             <div className="table-container mdl-grid" style={{padding:'0px'}}>
                 <div className="mdl-cell mdl-cell--6-col">
-                    <span className="mdl-layout-title">Bancos</span>
+                    <span className="mdl-layout-title">Agências Bancárias</span>
                 </div>
                 <div className="mdl-cell mdl-cell--6-col">
                     <NotificationComponent align="right" store={this.props.store} />
@@ -64,6 +64,7 @@ class TableBank extends Component {
                     <thead>
                         <tr>
                             <th className="mdl-data-table__cell--non-numeric">Banco</th>
+                            <th className="mdl-data-table__cell--non-numeric">Agência</th>
                             <th className="mdl-data-table__cell--non-numeric">Código</th>
                             <th></th>
                         </tr>
@@ -73,23 +74,25 @@ class TableBank extends Component {
                             this.tableEmpty()
                         }
                         {
-                            this.props.banks.map(bank => {
+                            this.props.banksAgencies.map(bankAgency => {
                                 return (
-                                    <tr key={bank.id}>
-                                        <td className={"mdl-data-table__cell--non-numeric cell-click " + (bank.active ? '' : 'row-disabled')}
-                                            onClick={() => this.props.info(bank.id, this.props.user)}>{bank.name}</td>
-                                        <td className={"mdl-data-table__cell--non-numeric cell-click " + (bank.active ? '' : 'row-disabled')}
-                                            onClick={() => this.props.info(bank.id, this.props.user)}>{bank.code}</td>                                        
+                                    <tr key={bankAgency.id}>
+                                        <td className={"mdl-data-table__cell--non-numeric cell-click " + (bankAgency.active ? '' : 'row-disabled')}
+                                            onClick={() => this.props.info(bankAgency.id, this.props.user)}>{bankAgency.bank.name}</td>
+                                        <td className={"mdl-data-table__cell--non-numeric cell-click " + (bankAgency.active ? '' : 'row-disabled')}
+                                            onClick={() => this.props.info(bankAgency.id, this.props.user)}>{bankAgency.name}</td>
+                                        <td className={"mdl-data-table__cell--non-numeric cell-click " + (bankAgency.active ? '' : 'row-disabled')}
+                                            onClick={() => this.props.info(bankAgency.id, this.props.user)}>{bankAgency.code}</td>                                        
                                         <td>
-                                            <button id={"bank" + bank.id}
+                                            <button id={"bank" + bankAgency.id}
                                                 className="mdl-button mdl-js-button mdl-button--icon">
                                                 <i className="material-icons black">more_vert</i>
                                             </button>
 
                                             <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                                                htmlFor={"bank" + bank.id}>
-                                                <li className="mdl-menu__item" onClick={() => this.props.edit(bank.id, this.props.user)}>Editar</li>
-                                                <li className="mdl-menu__item" onClick={() => this.props.alterStatus(bank.id, this.props.user)}>{bank.active ? 'Desativar' : 'Ativar'}</li>
+                                                htmlFor={"bank" + bankAgency.id}>
+                                                <li className="mdl-menu__item" onClick={() => this.props.edit(bankAgency.id, this.props.user)}>Editar</li>
+                                                <li className="mdl-menu__item" onClick={() => this.props.alterStatus(bankAgency.id, this.props.user)}>{bankAgency.active ? 'Desativar' : 'Ativar'}</li>
                                                 {/* <li className="mdl-menu__item" onClick={() => this.props.remove(bank.id, this.props.user)}>Editar</li> */}
                                             </ul>
                                         </td>
@@ -109,30 +112,30 @@ class TableBank extends Component {
 const mapStateToProps = state => {
     return { user : state.formUserMaster.user ? jwt.verify(state.formUserMaster.user , 'user') : state.formUserMaster.user,
                 progressBar : state.progressBar,
-            banks : state.banks }
+                banksAgencies : state.banksAgencies }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        listBanks: (user) => {
+        listBanksAgencies: (user) => {
             if(user !== null && user !== '')
-                dispatch(BankApi.listBanks(user));
+                dispatch(BankAgencyApi.listBanksAgencies(user));
         },
         edit: (id, user) => {
             if(user !== null && user !== '')
-                dispatch(BankApi.getBank(id,user, '/gestao/bancos/formulario'));
+                dispatch(BankAgencyApi.getBankAgency(id,user, '/gestao/agencias/formulario'));
         },
         alterStatus: (id, user) => {
             if(user !== null && user !== '')
-            dispatch(BankApi.alterStatus(id,user));
+            dispatch(BankAgencyApi.alterStatus(id,user));
         }
     }
 }
 
-TableBank.contextTypes = {
+TableBankAgency.contextTypes = {
     store: PropTypes.object.isRequired
 }
 
-const TableBankContainer = connect(mapStateToProps, mapDispatchToProps)(TableBank);
+const TableBankAgencyContainer = connect(mapStateToProps, mapDispatchToProps)(TableBankAgency);
 
-export default TableBankContainer
+export default TableBankAgencyContainer
