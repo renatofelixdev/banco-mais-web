@@ -28,3 +28,7 @@ table{
 .black{
     color: black !important;
 }
+
+.row-disabled{
+    text-decoration: line-through;
+}

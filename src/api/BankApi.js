@@ -2,7 +2,7 @@ import { alterProgressBar,
     updateNotification, 
     listBanks,
     formBank} from '../actions/actionCreator';
-import { LIST_BANKS, POST_BANK, BANK } from '../paths/routes';
+import { LIST_BANKS, POST_BANK, BANK, BANK_STATUS } from '../paths/routes';
 import { browserHistory } from 'react-router';
 import Bank from '../models/Bank';
 import Notification from '../models/Notification';
@@ -26,7 +26,7 @@ export default class BankApi {
                     if (response.ok) {
                         response.json().then(list => {
                             dispatch(alterProgressBar(false));
-
+                            console.log(list);
                             dispatch(listBanks(list));
                             return list;
                         });
@@ -122,37 +122,35 @@ export default class BankApi {
         }
     }
 
-    // static alterStatus(interviewSchedule){
+    static alterStatus(id, user){
 
-    //     return dispatch => {
-    //         //console.log("api info", id);
-    //         const requestInfo = {
-    //             method: 'PUT',
-    //             headers: new Headers({
-    //                 'Authorization': JSON.parse(localStorage.getItem("user")).token
-    //             })
-    //         };
-    //         dispatch(alterProgressBar(true));
-    //         fetch(STATUS_INTERVIEW_SCHEDULE.replace(":id", interviewSchedule.id), requestInfo)
-    //             .then(response => {
-    //                 if(response.ok) {
-    //                     response.json().then(notification => {                            
-    //                         dispatch(alterProgressBar(false));
-    //                         dispatch(updateNotification(true,notification));
-    //                         interviewSchedule.active = !interviewSchedule.active;
-    //                         dispatch(getInterviewSchedule(interviewSchedule, notification));
-                            
-    //                     });
-    //                 } else {       
-    //                     response.json().then(error=>{
-    //                         dispatch(alterProgressBar(false));
-    //                         dispatch(updateNotification(true,error));
-    //                         //console.log(error);
-    //                     });
-    //                 }
-    //             });
-    //     }
-    // }
+        return dispatch => {
+            //console.log("api info", id);
+            const requestInfo = {
+                method: 'PUT',
+                headers: new Headers({
+                    'Authorization': user.tokenAccess.token
+                })
+            };
+            dispatch(alterProgressBar(true));
+            fetch(BANK_STATUS.replace(":id", id), requestInfo)
+                .then(response => {
+                    if(response.ok) {
+                        response.json().then(notification => {                            
+                            dispatch(alterProgressBar(false));
+                            dispatch(updateNotification(true,notification));
+                            dispatch(this.listBanks(user));                         
+                        });
+                    } else {       
+                        response.json().then(error=>{
+                            dispatch(alterProgressBar(false));
+                            dispatch(updateNotification(true,error));
+                            //console.log(error);
+                        });
+                    }
+                });
+        }
+    }
 
     // static remove(id){
     //     return dispatch => {

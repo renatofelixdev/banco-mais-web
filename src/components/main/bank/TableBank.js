@@ -76,9 +76,9 @@ class TableBank extends Component {
                             this.props.banks.map(bank => {
                                 return (
                                     <tr key={bank.id}>
-                                        <td className={"mdl-data-table__cell--non-numeric cell-click " + (bank.active ? '' : 'bank-disabled')}
+                                        <td className={"mdl-data-table__cell--non-numeric cell-click " + (bank.active ? '' : 'row-disabled')}
                                             onClick={() => this.props.info(bank.id, this.props.user)}>{bank.name}</td>
-                                        <td className={"mdl-data-table__cell--non-numeric cell-click " + (bank.active ? '' : 'bank-disabled')}
+                                        <td className={"mdl-data-table__cell--non-numeric cell-click " + (bank.active ? '' : 'row-disabled')}
                                             onClick={() => this.props.info(bank.id, this.props.user)}>{bank.code}</td>                                        
                                         <td>
                                             <button id={"bank" + bank.id}
@@ -89,6 +89,8 @@ class TableBank extends Component {
                                             <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                                                 htmlFor={"bank" + bank.id}>
                                                 <li className="mdl-menu__item" onClick={() => this.props.edit(bank.id, this.props.user)}>Editar</li>
+                                                <li className="mdl-menu__item" onClick={() => this.props.alterStatus(bank.id, this.props.user)}>{bank.active ? 'Desativar' : 'Ativar'}</li>
+                                                {/* <li className="mdl-menu__item" onClick={() => this.props.remove(bank.id, this.props.user)}>Editar</li> */}
                                             </ul>
                                         </td>
                                     </tr>
@@ -117,8 +119,12 @@ const mapDispatchToProps = dispatch => {
                 dispatch(BankApi.listBanks(user));
         },
         edit: (id, user) => {
-            if(user !== null)
+            if(user !== null && user !== '')
                 dispatch(BankApi.getBank(id,user, '/gestao/bancos/formulario'));
+        },
+        alterStatus: (id, user) => {
+            if(user !== null && user !== '')
+            dispatch(BankApi.alterStatus(id,user));
         }
     }
 }

@@ -24,6 +24,7 @@ export function formUserMaster(userMaster, notification){
 }
 
 export function listBanks(list){
+    console.log(list);
     return {type:LIST_BANK, list}
 }
 
