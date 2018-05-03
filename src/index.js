@@ -5,6 +5,7 @@ import App from './App';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Bank from './components/main/bank/Bank';
+import FormBank from './components/main/bank/FormBank';
 
 import { Router, Route, browserHistory,IndexRoute } from 'react-router';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -17,6 +18,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import { notification } from './reducers/notification';
 import { progressBar } from './reducers/progressBar';
 import { formUserMaster } from './reducers/userMaster';
+import { banks, formBank } from './reducers/bank';
 
 
 function checkAuthentication(nextState, replace) {
@@ -26,7 +28,11 @@ function checkAuthentication(nextState, replace) {
 }
 
 
-const reducers = combineReducers({ notification, progressBar, formUserMaster });
+const reducers = combineReducers({ notification, 
+                                    progressBar, 
+                                    formUserMaster,
+                                    banks,
+                                    formBank });
 
 const persistConfig = {
     key:'root',
@@ -51,6 +57,7 @@ ReactDOM.render(
   
             <IndexRoute component={Bank}  onEnter={checkAuthentication}/>
             <Route  path="/gestao/bancos" component={Bank}  onEnter={checkAuthentication}/>
+            <Route  path="/gestao/bancos/formulario" component={FormBank}  onEnter={checkAuthentication}/>
   
           </Route>
           {/* <Route path="/cliente" component={App} store={store}>

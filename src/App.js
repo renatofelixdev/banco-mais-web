@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/template/Header';
 import Menu from './components/template/Menu';
 import 'material-design-lite/material';
+import './css/general.css';
 
 import PropTypes from 'prop-types';
 

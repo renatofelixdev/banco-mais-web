@@ -1,0 +1,26 @@
+.container{
+    width: 100%;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.table-container{
+    margin-top: 20px;
+}
+
+table{
+    width: 100%;
+}
+
+
+.material-icons{
+    color: white !important;
+}
+
+.contrib-menu-text{
+    color: white !important;
+}
+
+.mdl-card{
+    width: 100%;
+}
