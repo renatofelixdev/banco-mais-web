@@ -1,3 +1,3 @@
 const DOMAIN = "http://localhost:9000";
 
-export const LIST_MANAGERS= DOMAIN + "/api/managers";
+export const LOGIN_USER_MASTER = DOMAIN + "/api/user-master/login";

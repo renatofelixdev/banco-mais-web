@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ProgressBar from './ProgressBar';
 import Notification from './Notification';
-import NotificationModel from '../models/Notification';
 import LoginApi from '../api/LoginApi';
 import logo from '../imgs/logo.png';
 import '../css/login.css';

@@ -10,9 +10,13 @@ import { Router, Route, browserHistory,IndexRoute } from 'react-router';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import  storage  from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
+
+
+import { notification } from './reducers/notification';
+import { progressBar } from './reducers/progressBar';
+import { formUserMaster } from './reducers/userMaster';
 
 
 function checkAuthentication(nextState, replace) {
@@ -22,12 +26,12 @@ function checkAuthentication(nextState, replace) {
 }
 
 
-const reducers = combineReducers({ });
+const reducers = combineReducers({ notification, progressBar, formUserMaster });
 
 const persistConfig = {
     key:'root',
     storage,
-    whitelist:[]
+    whitelist:['formUserMaster']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers);
