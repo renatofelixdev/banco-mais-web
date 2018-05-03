@@ -11,7 +11,7 @@ export default class LoginApi {
         return dispatch => {
             const requestInfo = {
                 method: 'POST',
-                body: JSON.stringify({ email, password, clientId: CLIENT_ID, clientSecret: CLIENT_SECRET}),
+                body: JSON.stringify({ login:email, password, clientId: CLIENT_ID, clientSecret: CLIENT_SECRET}),
                 headers: new Headers({
                     'Content-type': 'application/json'
                 })

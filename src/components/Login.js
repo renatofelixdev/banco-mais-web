@@ -4,6 +4,7 @@ import Notification from './Notification';
 import LoginApi from '../api/LoginApi';
 import logo from '../imgs/logo.png';
 import '../css/login.css';
+import '../css/buttonFloat.css';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import InputCustom from './InputCustom';
@@ -31,7 +32,6 @@ class Login extends Component {
                         <InputCustom type="password" id="password" inputRef={(input) => this.password = input} label="Senha" validators={[]}/>
                     </div>
                     <div className="mdl-card__actions mdl-card--border">
-                        className="mdl-button mdl-button-l mdl-button--colored mdl-js-button mdl-js-ripple-effect" />
                         <input type="submit" value="Entrar" className="mdl-button mdl-button-r mdl-button--colored mdl-js-button mdl-js-ripple-effect" />
                     </div>
                 </div>
