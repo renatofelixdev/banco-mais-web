@@ -24,3 +24,7 @@ table{
 .mdl-card{
     width: 100%;
 }
+
+.black{
+    color: black !important;
+}

@@ -2,7 +2,7 @@ import { alterProgressBar,
     updateNotification, 
     listBanks,
     formBank} from '../actions/actionCreator';
-import { LIST_BANKS, POST_BANK, PUT_BANK } from '../paths/routes';
+import { LIST_BANKS, POST_BANK, BANK } from '../paths/routes';
 import { browserHistory } from 'react-router';
 import Bank from '../models/Bank';
 import Notification from '../models/Notification';
@@ -54,7 +54,7 @@ export default class BankApi {
             let url = POST_BANK;
             if(bank.id && bank.id > 0){
                 verb = 'PUT';
-                url = PUT_BANK.replace(":id", bank.id);
+                url = BANK.replace(":id", bank.id);
             }
 
             const requestInfo = {
@@ -90,37 +90,37 @@ export default class BankApi {
         }
     }
 
-    // static getInterviewSchedule(id, url) {
-    //     return dispatch => {
+    static getBank(id, user, url) {
+        return dispatch => {
 
-    //         const requestInfo = {
-    //             method: 'GET',
-    //             headers: new Headers({
-    //                 'Authorization': JSON.parse(localStorage.getItem("user")).token
-    //             })
-    //         };
+            const requestInfo = {
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': user.tokenAccess.token
+                })
+            };
 
-    //         dispatch(alterProgressBar(true));
-    //         console.log("id",id);
-    //         fetch(INTERVIEW_SCHEDULE.replace(":id", id), requestInfo)
-    //             .then(response => {
-    //                 if(response.ok) {
-    //                     response.json().then(interviewSchedule => {
-    //                         dispatch(alterProgressBar(false));
-    //                         dispatch(getInterviewSchedule(interviewSchedule, new Notification()));
-    //                         browserHistory.push(url);
-    //                         return interviewSchedule;
-    //                     });
-    //                 } else {       
-    //                     response.json().then(error=>{
-    //                         dispatch(alterProgressBar(false));
-    //                         dispatch(updateNotification(true,error));
-    //                         ////console.log(error);
-    //                     });
-    //                 }
-    //             });
-    //     }
-    // }
+            dispatch(alterProgressBar(true));
+
+            fetch(BANK.replace(":id", id), requestInfo)
+                .then(response => {
+                    if(response.ok) {
+                        response.json().then(bank => {
+                            dispatch(alterProgressBar(false));
+                            dispatch(formBank(bank, new Notification()));
+                            browserHistory.push(url);
+                            return bank;
+                        });
+                    } else {       
+                        response.json().then(error=>{
+                            dispatch(alterProgressBar(false));
+                            dispatch(updateNotification(true,error));
+                            ////console.log(error);
+                        });
+                    }
+                });
+        }
+    }
 
     // static alterStatus(interviewSchedule){
 

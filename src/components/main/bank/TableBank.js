@@ -51,7 +51,7 @@ class TableBank extends Component {
 
     render() {
         return (
-            <div className="table-container">
+            <div className="table-container mdl-grid" style={{padding:'0px'}}>
                 <div className="mdl-cell mdl-cell--6-col">
                     <span className="mdl-layout-title">Bancos</span>
                 </div>
@@ -114,15 +114,11 @@ const mapDispatchToProps = dispatch => {
     return {
         listBanks: (user) => {
             if(user !== null && user !== '')
-            dispatch(BankApi.listBanks(user));
+                dispatch(BankApi.listBanks(user));
         },
         edit: (id, user) => {
-            // if(user !== null)
-            // dispatch(BankApi.getBank(id,user, '/gestao/bancos/formulario'));
-        },
-        info:(id, user) => {
-            // if(user !== null)
-            // dispatch(BankApi.getBank(id,user, '/gestao/bancos/info'));
+            if(user !== null)
+                dispatch(BankApi.getBank(id,user, '/gestao/bancos/formulario'));
         }
     }
 }
