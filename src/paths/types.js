@@ -8,3 +8,5 @@ export const LIST_BANK_AGENCY    = "LIST_BANK_AGENCY";
 export const FORM_BANK_AGENCY    = "FORM_BANK_AGENCY";
 export const BANK_AGENCY_BANKS    = "BANK_AGENCY_BANKS";
 export const CHANGE_BANK    = "CHANGE_BANK";
+export const LIST_USER_CLIENT    = "LIST_USER_CLIENT";
+export const FORM_USER_CLIENT    = "FORM_USER_CLIENT";

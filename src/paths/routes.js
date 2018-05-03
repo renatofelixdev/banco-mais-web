@@ -12,3 +12,7 @@ export const POST_BANK_AGENCY = DOMAIN + "/api/bank-agency";
 export const BANK_AGENCY = DOMAIN + "/api/bank-agency/:id";
 export const BANK_AGENCY_STATUS = DOMAIN + "/api/bank-agency/:id/status";
 
+export const LIST_USERS_CLIENT = DOMAIN + "/api/users-client";
+export const POST_USER_CLIENT = DOMAIN + "/api/user-client";
+export const USER_CLIENT = DOMAIN + "/api/user-client/:id";
+export const USER_CLIENT_STATUS = DOMAIN + "/api/user-client/:id/status";

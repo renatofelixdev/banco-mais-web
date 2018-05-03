@@ -18,7 +18,7 @@ class Menu extends Component {
     render(){
         return (
             <div className="components-menu-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-                <header className="drawer-header">
+                <header className="drawer-header"> 
                    
                     <img src='https://getmdl.io/templates/dashboard/images/user.jpg' className="avatar" alt="Usuário"/>
                    
@@ -34,7 +34,7 @@ class Menu extends Component {
                         <Link className="mdl-navigation__link" to="/gestao/bancos"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">description</i><span className="contrib-menu-text contrib-url-noticias">Bancos</span></Link>
                         <Link className="mdl-navigation__link" to="/gestao/agencias"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">record_voice_over</i><span className="contrib-menu-text contrib-url-noticias">Agências</span></Link>
                         <Link className="mdl-navigation__link" to="/gestao/contas"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">layers</i><span className="contrib-menu-text">Contas</span></Link>
-                        <Link className="mdl-navigation__link" to="/gestao/usuarios"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i><span className="contrib-menu-text">Usuários</span></Link>
+                        <Link className="mdl-navigation__link" to="/gestao/clientes"><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i><span className="contrib-menu-text">Usuários</span></Link>
                 </nav>
             </div>
         );

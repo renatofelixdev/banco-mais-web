@@ -18,7 +18,7 @@ class FormBankAgency extends Component {
         browserHistory.push('/gestao/agencias');
     }
 
-    saveBank(event) {
+    saveBankAgency(event) {
         event.preventDefault();
 
         let bankAgency = this.props.bankAgency;
@@ -66,7 +66,7 @@ class FormBankAgency extends Component {
                 <BreadCrumb way={[{'name':'Banco Mais', 'link':'/gestao'}, 
                                     {'name':'Agências Bancárias', 'link':'/gestao/agencias'},
                                     {'name':'Cadastro de Agência Bancária', 'link':''}]}/>
-                <form className="form-company" onSubmit={this.saveBank.bind(this)}>
+                <form className="form-company" onSubmit={this.saveBankAgency.bind(this)}>
                     
                         <div className=" mdl-grid">
                         <TitlePage title="Cadastro de Agência Bancária" back={this.back.bind(this)}/>

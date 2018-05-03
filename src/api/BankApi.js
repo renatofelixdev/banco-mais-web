@@ -26,7 +26,6 @@ export default class BankApi {
                     if (response.ok) {
                         response.json().then(list => {
                             dispatch(alterProgressBar(false));
-                            console.log(list);
                             dispatch(listBanks(list));
                             return list;
                         });

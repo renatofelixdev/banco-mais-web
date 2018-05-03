@@ -8,6 +8,8 @@ import Bank from './components/main/bank/Bank';
 import FormBank from './components/main/bank/FormBank';
 import BankAgency from './components/main/bankAgency/BankAgency';
 import FormBankAgency from './components/main/bankAgency/FormBankAgency';
+import UserClient from './components/main/userClient/UserClient';
+import FormUserClient from './components/main/userClient/FormUserClient';
 
 import { Router, Route, browserHistory,IndexRoute } from 'react-router';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -22,6 +24,7 @@ import { progressBar } from './reducers/progressBar';
 import { formUserMaster } from './reducers/userMaster';
 import { banks, formBank } from './reducers/bank';
 import { banksAgencies, formBankAgency } from './reducers/bankAgency';
+import { usersClient, formUserClient } from './reducers/userClient';
 
 
 function checkAuthentication(nextState, replace) {
@@ -37,7 +40,9 @@ const reducers = combineReducers({ notification,
                                     banks,
                                     formBank,
                                     banksAgencies,
-                                    formBankAgency });
+                                    formBankAgency,
+                                    usersClient,
+                                    formUserClient});
 
 const persistConfig = {
     key:'root',
@@ -64,9 +69,11 @@ ReactDOM.render(
             <Route  path="/gestao/bancos" component={Bank}  onEnter={checkAuthentication}/>
             <Route  path="/gestao/bancos/formulario" component={FormBank}  onEnter={checkAuthentication}/>
 
-
             <Route  path="/gestao/agencias" component={BankAgency}  onEnter={checkAuthentication}/>
             <Route  path="/gestao/agencias/formulario" component={FormBankAgency}  onEnter={checkAuthentication}/>
+
+            <Route  path="/gestao/clientes" component={UserClient}  onEnter={checkAuthentication}/>
+            <Route  path="/gestao/clientes/formulario" component={FormUserClient}  onEnter={checkAuthentication}/>
   
           </Route>
           {/* <Route path="/cliente" component={App} store={store}>

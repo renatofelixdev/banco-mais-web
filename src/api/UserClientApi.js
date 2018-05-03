@@ -1,17 +1,15 @@
 import { alterProgressBar, 
     updateNotification, 
-    listBanksAgencies,
-    formBankAgency,
-    changeBank,
-    listBanksToAgencies} from '../actions/actionCreator';
-import { LIST_BANKS, LIST_BANKS_AGENCIES, POST_BANK_AGENCY, BANK_AGENCY, BANK_AGENCY_STATUS } from '../paths/routes';
+    listUsersClient,
+    formUserClient} from '../actions/actionCreator';
+import { LIST_USERS_CLIENT, POST_USER_CLIENT, USER_CLIENT, USER_CLIENT_STATUS } from '../paths/routes';
 import { browserHistory } from 'react-router';
-import BankAgency from '../models/BankAgency';
+import UserClient from '../models/UserClient';
 import Notification from '../models/Notification';
 
-export default class BankAgencyApi {
+export default class UserClientApi {
 
-    static listBanksAgencies(user) {
+    static listUsersClient(user) {
         return dispatch => {
 
             const requestInfo = {
@@ -23,12 +21,12 @@ export default class BankAgencyApi {
 
             dispatch(alterProgressBar(true));
 
-            fetch(LIST_BANKS_AGENCIES, requestInfo)
+            fetch(LIST_USERS_CLIENT, requestInfo)
                 .then(response => {
                     if (response.ok) {
                         response.json().then(list => {
                             dispatch(alterProgressBar(false));
-                            dispatch(listBanksAgencies(list));
+                            dispatch(listUsersClient(list));
                             return list;
                         });
                     } else {
@@ -43,63 +41,24 @@ export default class BankAgencyApi {
         }
     }
 
-    static newBankAgency(){
+    static newUserClient(){
         return dispatch => {
-            dispatch(formBankAgency(new BankAgency(), new Notification()));
+            dispatch(formUserClient(new UserClient(), new Notification()));
         }
     }
 
-    static changeBank(value){
-        return dispatch => {
-            dispatch(changeBank(value));
-        }
-    }
-
-    static getBanks(user){
-        return dispatch => {
-
-            const requestInfo = {
-                method: 'GET',
-                headers: new Headers({
-                    'Authorization': user.tokenAccess.token
-                })
-            };
-
-            dispatch(alterProgressBar(true));
-
-            fetch(LIST_BANKS, requestInfo)
-                .then(response => {
-                    if(response.ok) {
-                        response.json().then(list => {
-                            dispatch(alterProgressBar(false));
-                            
-                            dispatch(listBanksToAgencies(list));
-                            return list;
-                        });
-                    } else {       
-                        response.json().then(error=>{
-                            dispatch(alterProgressBar(false));
-                            dispatch(updateNotification(true,error));
-                            //console.log(error);
-                            return error;
-                        });
-                    }
-                });
-        }
-    }
-
-    static saveBankAgency(bankAgency, user){
+    static saveUserClient(userClient, user){
         return dispatch => {
             let verb = 'POST';
-            let url = POST_BANK_AGENCY;
-            if(bankAgency.id && bankAgency.id > 0){
+            let url = POST_USER_CLIENT;
+            if(userClient.id && userClient.id > 0){
                 verb = 'PUT';
-                url = BANK_AGENCY.replace(":id", bankAgency.id);
+                url = USER_CLIENT.replace(":id", userClient.id);
             }
 
             const requestInfo = {
                 method: verb,
-                body: JSON.stringify(bankAgency),
+                body: JSON.stringify(userClient),
                 headers: new Headers({
                     'Authorization': user.tokenAccess.token,
                     'Content-type': 'application/json'
@@ -114,14 +73,14 @@ export default class BankAgencyApi {
                         response.json().then(success => {
                             dispatch(updateNotification(true,success));
                             dispatch(alterProgressBar(false));
-                            browserHistory.push('/gestao/agencias');
+                            browserHistory.push('/gestao/clientes');
                             return success;
                         });
                     } else {       
                         response.json().then(error=>{
                             //console.log("error", error);
                             dispatch(alterProgressBar(false));
-                            dispatch(formBankAgency(null, error));
+                            dispatch(formUserClient(null, error));
                             dispatch(updateNotification(true,error));
                             return error;
                         });
@@ -130,7 +89,7 @@ export default class BankAgencyApi {
         }
     }
 
-    static getBankAgency(id, user, url) {
+    static getUserClient(id, user, url) {
         return dispatch => {
 
             const requestInfo = {
@@ -142,14 +101,14 @@ export default class BankAgencyApi {
 
             dispatch(alterProgressBar(true));
 
-            fetch(BANK_AGENCY.replace(":id", id), requestInfo)
+            fetch(USER_CLIENT.replace(":id", id), requestInfo)
                 .then(response => {
                     if(response.ok) {
-                        response.json().then(bankAgency => {
+                        response.json().then(userClient => {
                             dispatch(alterProgressBar(false));
-                            dispatch(formBankAgency(bankAgency, new Notification()));
+                            dispatch(formUserClient(userClient, new Notification()));
                             browserHistory.push(url);
-                            return bankAgency;
+                            return userClient;
                         });
                     } else {       
                         response.json().then(error=>{
@@ -173,13 +132,13 @@ export default class BankAgencyApi {
                 })
             };
             dispatch(alterProgressBar(true));
-            fetch(BANK_AGENCY_STATUS.replace(":id", id), requestInfo)
+            fetch(USER_CLIENT_STATUS.replace(":id", id), requestInfo)
                 .then(response => {
                     if(response.ok) {
                         response.json().then(notification => {                            
                             dispatch(alterProgressBar(false));
                             dispatch(updateNotification(true,notification));
-                            dispatch(this.listBanksAgencies(user));                         
+                            dispatch(this.listUsersClient(user));                         
                         });
                     } else {       
                         response.json().then(error=>{

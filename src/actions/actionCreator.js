@@ -8,7 +8,9 @@ import {
     BANK_AGENCY_BANKS,
     CHANGE_BANK,
     LIST_BANK_AGENCY,
-    FORM_BANK_AGENCY
+    FORM_BANK_AGENCY,
+    LIST_USER_CLIENT,
+    FORM_USER_CLIENT
 } from '../paths/types';
 
 export function login(jsonResponse){
@@ -51,4 +53,13 @@ export function listBanksToAgencies(list){
 
 export function changeBank(value){
     return {type:CHANGE_BANK, value}
+}
+
+
+export function listUsersClient(list){
+    return {type:LIST_USER_CLIENT, list}
+}
+
+export function formUserClient(userClient=null, notification=new Notification()){
+    return {type:FORM_USER_CLIENT, userClient, notification}
 }
